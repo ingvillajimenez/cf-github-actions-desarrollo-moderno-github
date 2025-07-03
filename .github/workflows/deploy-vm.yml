@@ -16,4 +16,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Connect to VM and run commands
-        run: ssh azureuser@135.233.113.158 touch hola.txt
+        run: ssh -o StrictHostKeyChecking=no azureuser@135.233.113.158 touch hola.txt
