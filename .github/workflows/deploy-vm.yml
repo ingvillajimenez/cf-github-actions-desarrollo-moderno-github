@@ -25,10 +25,10 @@ jobs:
       # - name: Deploy application
       #   run: bash deploy.sh
 
-      - name: Deploy to stage server
-        if: ${{ github.ref == 'refs/heads/stage' }}
-        run: bash deploy.sh stage
-
       - name: Deploy to prod server
         if: ${{ github.ref == 'refs/heads/master' }}
         run: bash deploy.sh master
+
+      - name: Deploy to stage server
+        if: ${{ github.ref == 'refs/heads/stage' }}
+        run: bash deploy.sh stage
