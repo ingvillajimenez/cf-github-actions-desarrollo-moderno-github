@@ -1,6 +1,10 @@
 name: Deploy VM
 
-on: push
+on:
+  push:
+    branches:
+      - master
+      - stage
 
 jobs:
   build-and-deploy:
@@ -15,8 +19,16 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Connect to VM and run commands
-        run: ssh -o StrictHostKeyChecking=no azureuser@135.233.113.158 touch hola.txt
+      # - name: Connect to VM and run commands
+      #   run: ssh -o StrictHostKeyChecking=no azureuser@135.233.113.158 touch hola.txt
 
-      - name: Deploy application
-        run: bash deploy.sh
+      # - name: Deploy application
+      #   run: bash deploy.sh
+
+      - name: Deploy to stage server
+        if: ${{ github.ref == 'refs/heads/stage' }}
+        run: bash deploy.sh stage
+
+      - name: Deploy to prod server
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: bash deploy.sh master
