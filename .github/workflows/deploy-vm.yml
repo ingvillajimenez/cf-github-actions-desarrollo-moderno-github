@@ -17,3 +17,6 @@ jobs:
 
       - name: Connect to VM and run commands
         run: ssh -o StrictHostKeyChecking=no azureuser@135.233.113.158 touch hola.txt
+
+      - name: Deploy application
+        run: bash deploy.sh
